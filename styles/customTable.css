@@ -1,0 +1,30 @@
+.tableFixHead {
+  overflow: auto;
+}
+.tableFixHead thead th {
+  position: sticky;
+  top: -1px;
+  z-index: 1;
+}
+th {
+  background: #eee;
+  z-index: 100;
+}
+.tableFixHead::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+.tableFixHead::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.tableFixHead::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+.tableFixHead::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
