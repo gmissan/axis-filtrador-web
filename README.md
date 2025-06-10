@@ -23,7 +23,7 @@ Podés usar la aplicación directamente desde tu navegador en el siguiente enlac
    Elegí si vas a cargar un archivo de tipo `OPERSECEXT_GARA` o `OPERBILEXT_GARA`.
 
 4. **Cargá el archivo a filtrar**  
-   Seleccioná el archivo `.csv` o `.txt` desde tu computadora.  
+   Seleccioná el archivo `.dat` o `.txt` desde tu computadora.  
    El sistema lo procesará y mostrará solo las filas que coincidan con las cuentas cargadas.
 
 5. **Descargá el resultado**  
