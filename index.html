@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Axis - Filtrador Web </title>
+    <title>Axis - Filtrador Web</title>
 
     <link rel="icon" type="image/svg+xml" href="axisicon.svg" />
     <link rel="stylesheet" href="styles/bootstrap.min.css" crossorigin="anonymous" />
@@ -14,13 +14,24 @@
       <div class="row mb-4">
         <div class="col-12" style="display: flex; justify-content: space-between; align-items: center">
           <h2>Filtrador de OPERSEC y OPERBIL</h2>
-          <button
-            @click="alert('Esta aplicación web no envía información a servidores externos. Todos los datos se procesan localmente en tu navegador, y la información del listado de cuentas se guarda de forma segura en el almacenamiento local (localStorage).');
-"
-            class="btn btn-sm btn-warning float-right"
-          >
-            ℹ️
-          </button>
+
+          <div>
+            <button
+              onclick="window.open('https://github.com/gmissan/axis-filtrador-web', '_blank')"
+              class="btn btn-sm btn-primary float-right ml-1"
+            >
+              📄
+            </button>
+
+            <button
+              @click="alert('Esta aplicación web no envía información a servidores externos. Todos los datos se procesan localmente en tu navegador, y la información del listado de cuentas se guarda de forma segura en el almacenamiento local (localStorage).');
+"          
+              class="btn btn-sm btn-warning float-right "
+    
+            >
+              ℹ️
+            </button>
+          </div>
         </div>
       </div>
 
