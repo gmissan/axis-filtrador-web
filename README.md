@@ -33,7 +33,7 @@ Podés usar la aplicación directamente desde tu navegador en el siguiente enlac
 
 ## 📦 Archivos de entrada compatibles
 
-- Archivos exportados desde sistemas del mercado (por ejemplo, BYMA), en formato `.dat`, `.csv` o `.txt`.
+- Archivos exportados desde el sistema SDIB del mercado (BYMA), en formato `.dat`, `.csv` o `.txt`.
 - Se procesan con funciones adaptadas a los formatos de `OPERSECEXT_GARA` y `OPERBILEXT_GARA`.
 
 ---
