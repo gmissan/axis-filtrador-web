@@ -1,119 +1,126 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8" />
-  <title>Axis - Filtrador Web</title>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Axis - Filtrador Web</title>
 
- <link rel="icon" type="image/svg+xml" href="/axisicon.svg" />
-  <link rel="stylesheet" href="styles/bootstrap.min.css" crossorigin="anonymous" />
-  <link rel="stylesheet" href="styles/customTable.css" />
-  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-</head>
-<body>
-  <div id="app" class="mt-3 container-fluid">
-    <div class="row mb-4">
-        <div class="col-12" style="display: flex; justify-content: space-between; align-items: center;">
-    <h2> Filtrador de OPERSEC y OPERBIL </h2>
-    <button @click="alert('Esta aplicación web no envía información a servidores externos. Todos los datos se procesan localmente en tu navegador, y la información del listado de cuentas se guarda de forma segura en el almacenamiento local (localStorage).');
-" class="btn btn-sm btn-warning float-right">ℹ️</button>
-        </div>
-
-    </div>
-
-    <div class="row">
-      <!-- Panel de cuentas -->
-       <div class="col-12">
-       <div class="card">
-        <div class="card-body">
-         <div class="row">
-      <div class="col-6">
-        <div class="card">
-          <div class="card-header"><b>Administrar cuentas</b></div>
-          <div class="card-body">
-            <div style="max-height: 30vh;" class="tableFixHead">
-              <table class="table table-sm table-bordered table-hover">
-                <thead>
-                  <tr><th>Listado de Cuentas</th><th></th></tr>
-                  <tr>
-                    <th><input class="form-control" v-model="formCuentas.comitente" type="text"></th>
-                    <th class="text-center"><button @click="addCuenta" class="btn btn-sm btn-success">+</button></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="row in listaCuentas" :key="row.id">
-                    <td class="text-center">{{ row.comitente }}</td>
-                    <td class="text-center"><button @click="delCuenta(row.id)" class="btn btn-sm btn-danger">-</button></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+    <link rel="icon" type="image/svg+xml" href="/axisicon.svg" />
+    <link rel="stylesheet" href="styles/bootstrap.min.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="styles/customTable.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  </head>
+  <body>
+    <div id="app" class="mt-3 container-fluid">
+      <div class="row mb-4">
+        <div class="col-12" style="display: flex; justify-content: space-between; align-items: center">
+          <h2>Filtrador de OPERSEC y OPERBIL</h2>
+          <button
+            @click="alert('Esta aplicación web no envía información a servidores externos. Todos los datos se procesan localmente en tu navegador, y la información del listado de cuentas se guarda de forma segura en el almacenamiento local (localStorage).');
+"
+            class="btn btn-sm btn-warning float-right"
+          >
+            ℹ️
+          </button>
         </div>
       </div>
-      <!-- Panel de carga de archivos -->
-      <div class="col-6">
-        <div class="card">
-          <div class="card-header"><b>Cargar archivo</b></div>
-          <div class="card-body">
-            <div class="row">
-              <div class="col"><select v-model="selectedFileType" class="form-control">
-                <option value="OPERSECEXT_GARA">OPERSECEXT_GARA</option>
-                <option value="OPERBILEXT_GARA">OPERBILEXT_GARA</option>
-              </select></div>
-              <div class="col">
-                <input type="file" @change="onFileChange" accept="*" />
+
+      <div class="row">
+        <!-- Panel de cuentas -->
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-6">
+                  <div class="card">
+                    <div class="card-header"><b>Administrar cuentas</b></div>
+                    <div class="card-body">
+                      <div style="max-height: 30vh" class="tableFixHead">
+                        <table class="table table-sm table-bordered table-hover">
+                          <thead>
+                            <tr>
+                              <th>Listado de Cuentas</th>
+                              <th></th>
+                            </tr>
+                            <tr>
+                              <th><input class="form-control" v-model="formCuentas.comitente" type="text" /></th>
+                              <th class="text-center"><button @click="addCuenta" class="btn btn-sm btn-success">+</button></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr v-for="row in listaCuentas" :key="row.id">
+                              <td class="text-center">{{ row.comitente }}</td>
+                              <td class="text-center"><button @click="delCuenta(row.id)" class="btn btn-sm btn-danger">-</button></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Panel de carga de archivos -->
+                <div class="col-6">
+                  <div class="card">
+                    <div class="card-header"><b>Cargar archivo</b></div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col">
+                          <select v-model="selectedFileType" class="form-control">
+                            <option value="OPERSECEXT_GARA">OPERSECEXT_GARA</option>
+                            <option value="OPERBILEXT_GARA">OPERBILEXT_GARA</option>
+                          </select>
+                        </div>
+                        <div class="col">
+                          <input type="file" @change="onFileChange" accept="*" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      </div>
-        
-     </div>
-       </div>
-</div>
-    </div>
-    <!-- Tablas de resultados -->
-    <div class="row">
-      <div class="col-12">
-        <tabla-opers :contenido="contenidoOPERSEC" nombrearchivo="OPERSECEXT_GARA" :headers="tbHeadersOPERSEC"></tabla-opers>
-      </div>
-      <div class="col-12">
-        <tabla-opers :contenido="contenidoOPERBIL" nombrearchivo="OPERBILEXT_GARA" :headers="tbHeadersOPERBIL"></tabla-opers>
+      <!-- Tablas de resultados -->
+      <div class="row">
+        <div class="col-12">
+          <tabla-opers :contenido="contenidoOPERSEC" nombrearchivo="OPERSECEXT_GARA" :headers="tbHeadersOPERSEC"></tabla-opers>
+        </div>
+        <div class="col-12">
+          <tabla-opers :contenido="contenidoOPERBIL" nombrearchivo="OPERBILEXT_GARA" :headers="tbHeadersOPERBIL"></tabla-opers>
+        </div>
       </div>
     </div>
-  </div>
 
-  <script>
-    function uuidv4() {
-      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
-        const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-        return v.toString(16);
-      });
-    }
+    <script>
+      function uuidv4() {
+        return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
+          const r = (Math.random() * 16) | 0,
+            v = c == "x" ? r : (r & 0x3) | 0x8;
+          return v.toString(16);
+        });
+      }
 
-    function downloadFile(fileName, content) {
-      const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
-      const url = URL.createObjectURL(blob);
-      const link = Object.assign(document.createElement('a'), { href: url, download: fileName });
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      URL.revokeObjectURL(url);
-    }
+      function downloadFile(fileName, content) {
+        const blob = new Blob([content], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const link = Object.assign(document.createElement("a"), { href: url, download: fileName });
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(url);
+      }
 
-    Vue.component("tabla-opers", {
-      props: ["contenido", "headers", "nombrearchivo"],
-      methods: {
-        descargaArhivo() {
-          const csv = this.contenido.map(row =>
-            this.headers.map(h => row[h.accessKey] || "").join(";")
-          ).join("\r\n");
-          const fecha = new Date().toISOString().split("T")[0];
-          downloadFile(`${this.nombrearchivo}_FILTRADO_${fecha}.csv`, csv);
-        }
-      },
-      template: `
+      Vue.component("tabla-opers", {
+        props: ["contenido", "headers", "nombrearchivo"],
+        methods: {
+          descargaArhivo() {
+            const csv = this.contenido.map((row) => this.headers.map((h) => row[h.accessKey] || "").join(";")).join("\r\n");
+            const fecha = new Date().toISOString().split("T")[0];
+            downloadFile(`${this.nombrearchivo}_FILTRADO_${fecha}.csv`, csv);
+          },
+        },
+        template: `
         <div class="card">
           <div class="card-header">
             <b>{{ nombrearchivo }}</b>
@@ -134,312 +141,311 @@
               </table>
             </div>
           </div>
-        </div>`
-    });
+        </div>`,
+      });
 
-    const app = new Vue({
-      el: "#app",
-      data: {
-        listaCuentas: [],
-        formCuentas: { comitente: "" },
-        selectedFileType: null,
-        contenidoOPERSEC: [],
-        contenidoOPERBIL: [],
-           tbHeadersOPERBIL: [
-        { accessKey: "secuencia", tableHeader: "Secuencia" },
-        { accessKey: "numeroOperacion", tableHeader: "Número Operación" },
-        { accessKey: "estadoOperacion", tableHeader: "Estado Operación" },
-        { accessKey: "origenOperacionMercado", tableHeader: "Origen Operación Mercado" },
-        { accessKey: "tipoOferta", tableHeader: "Tipo Oferta" },
-        { accessKey: "formaOperativa", tableHeader: "Forma Operativa" },
-        { accessKey: "codAgenteContraparte", tableHeader: "Código Agente Contraparte" },
-        { accessKey: "codComitente", tableHeader: "Código Comitente" },
-        { accessKey: "marcaDePase", tableHeader: "Marca de Pase" },
-        { accessKey: "codEspecie", tableHeader: "Código Especie" },
-        { accessKey: "plazo", tableHeader: "Plazo" },
-        { accessKey: "nroEspecie", tableHeader: "Número Especie" },
-        { accessKey: "codMoneda", tableHeader: "Código Moneda" },
-        { accessKey: "cantidad", tableHeader: "Cantidad" },
-        { accessKey: "precio", tableHeader: "Precio" },
-        { accessKey: "monto", tableHeader: "Monto" },
-        { accessKey: "horaIngresoOperacion", tableHeader: "Hora Ingreso Operación" },
-        { accessKey: "codNumericoFormaLiq", tableHeader: "Código Numérico Forma Liquidación" },
-        { accessKey: "tipoMercado", tableHeader: "Tipo Mercado" },
-        { accessKey: "CUIT", tableHeader: "CUIT" },
-        { accessKey: "depositaria", tableHeader: "Depositaria" },
-        { accessKey: "codCNV", tableHeader: "Código CNV" },
-        { accessKey: "tipoLiq", tableHeader: "Tipo Liquidación" },
-        { accessKey: "ctaClienteInterno", tableHeader: "Cuenta Cliente Interno" },
-        { accessKey: "participanteBYMA", tableHeader: "Participante BYMA" },
-        { accessKey: "ownerID", tableHeader: "Owner ID" },
-        { accessKey: "carteraPropia", tableHeader: "Cartera Propia" },
-        { accessKey: "otroID", tableHeader: "Otro ID" },
-        { accessKey: "tipoOperacionContraAG", tableHeader: "Tipo Operación Contra AG" },
-        { accessKey: "codComitenteCarteraPropia", tableHeader: "Código Comitente Cartera Propia" }
-      ],
-      tbHeadersOPERSEC: [
-        { accessKey: "secuencia", tableHeader: "Secuencia" },
-        { accessKey: "numeroOperacion", tableHeader: "Número Operación" },
-        { accessKey: "tipoOferta", tableHeader: "Tipo Oferta" },
-        { accessKey: "codAgenteContraparte", tableHeader: "Código Agente Contraparte" },
-        { accessKey: "horaIngresoOperacion", tableHeader: "Hora Ingreso Operación" },
-        { accessKey: "estadoOperacion", tableHeader: "Estado Operación" },
-        { accessKey: "formaOperativa", tableHeader: "Forma Operativa" },
-        { accessKey: "codEspecie", tableHeader: "Código Especie" },
-        { accessKey: "nroEspecie", tableHeader: "Número Especie" },
-        { accessKey: "plazo", tableHeader: "Plazo" },
-        { accessKey: "vencimiento", tableHeader: "Vencimiento" },
-        { accessKey: "codMoneda", tableHeader: "Código Moneda" },
-        { accessKey: "cantidad", tableHeader: "Cantidad" },
-        { accessKey: "precio", tableHeader: "Precio" },
-        { accessKey: "numeroOferta", tableHeader: "Número Oferta" },
-        { accessKey: "fechaIngresoOferta", tableHeader: "Fecha Ingreso Oferta" },
-        { accessKey: "operadorOferta", tableHeader: "Operador Oferta" },
-        { accessKey: "codComitente", tableHeader: "Código Comitente" },
-        { accessKey: "ventaEnCorto", tableHeader: "Venta en Corto" },
-        { accessKey: "monto", tableHeader: "Monto" },
-        { accessKey: "marcaDePase", tableHeader: "Marca de Pase" },
-        { accessKey: "tipoCuenta", tableHeader: "Tipo Cuenta" },
-        { accessKey: "horaIngresoOferta", tableHeader: "Hora Ingreso Oferta" },
-        { accessKey: "cantidadDias", tableHeader: "Cantidad Días" },
-        { accessKey: "marcaDeOrigen", tableHeader: "Marca de Origen" },
-        { accessKey: "corredorSistaco", tableHeader: "Corredor Sistaco" },
-        { accessKey: "CUIT", tableHeader: "CUIT" },
-        { accessKey: "nroCuenta", tableHeader: "Número Cuenta" }
-      ]
-      },
-      mounted() {
-        const stored = localStorage.getItem("listaComitentes");
-        this.listaCuentas = stored ? JSON.parse(stored) : [];
-      },
-      methods: {
-        saveCuentas() {
-          localStorage.setItem("listaComitentes", JSON.stringify(this.listaCuentas));
+      const app = new Vue({
+        el: "#app",
+        data: {
+          listaCuentas: [],
+          formCuentas: { comitente: "" },
+          selectedFileType: null,
+          contenidoOPERSEC: [],
+          contenidoOPERBIL: [],
+          tbHeadersOPERBIL: [
+            { accessKey: "secuencia", tableHeader: "Secuencia" },
+            { accessKey: "numeroOperacion", tableHeader: "Número Operación" },
+            { accessKey: "estadoOperacion", tableHeader: "Estado Operación" },
+            { accessKey: "origenOperacionMercado", tableHeader: "Origen Operación Mercado" },
+            { accessKey: "tipoOferta", tableHeader: "Tipo Oferta" },
+            { accessKey: "formaOperativa", tableHeader: "Forma Operativa" },
+            { accessKey: "codAgenteContraparte", tableHeader: "Código Agente Contraparte" },
+            { accessKey: "codComitente", tableHeader: "Código Comitente" },
+            { accessKey: "marcaDePase", tableHeader: "Marca de Pase" },
+            { accessKey: "codEspecie", tableHeader: "Código Especie" },
+            { accessKey: "plazo", tableHeader: "Plazo" },
+            { accessKey: "nroEspecie", tableHeader: "Número Especie" },
+            { accessKey: "codMoneda", tableHeader: "Código Moneda" },
+            { accessKey: "cantidad", tableHeader: "Cantidad" },
+            { accessKey: "precio", tableHeader: "Precio" },
+            { accessKey: "monto", tableHeader: "Monto" },
+            { accessKey: "horaIngresoOperacion", tableHeader: "Hora Ingreso Operación" },
+            { accessKey: "codNumericoFormaLiq", tableHeader: "Código Numérico Forma Liquidación" },
+            { accessKey: "tipoMercado", tableHeader: "Tipo Mercado" },
+            { accessKey: "CUIT", tableHeader: "CUIT" },
+            { accessKey: "depositaria", tableHeader: "Depositaria" },
+            { accessKey: "codCNV", tableHeader: "Código CNV" },
+            { accessKey: "tipoLiq", tableHeader: "Tipo Liquidación" },
+            { accessKey: "ctaClienteInterno", tableHeader: "Cuenta Cliente Interno" },
+            { accessKey: "participanteBYMA", tableHeader: "Participante BYMA" },
+            { accessKey: "ownerID", tableHeader: "Owner ID" },
+            { accessKey: "carteraPropia", tableHeader: "Cartera Propia" },
+            { accessKey: "otroID", tableHeader: "Otro ID" },
+            { accessKey: "tipoOperacionContraAG", tableHeader: "Tipo Operación Contra AG" },
+            { accessKey: "codComitenteCarteraPropia", tableHeader: "Código Comitente Cartera Propia" },
+          ],
+          tbHeadersOPERSEC: [
+            { accessKey: "secuencia", tableHeader: "Secuencia" },
+            { accessKey: "numeroOperacion", tableHeader: "Número Operación" },
+            { accessKey: "tipoOferta", tableHeader: "Tipo Oferta" },
+            { accessKey: "codAgenteContraparte", tableHeader: "Código Agente Contraparte" },
+            { accessKey: "horaIngresoOperacion", tableHeader: "Hora Ingreso Operación" },
+            { accessKey: "estadoOperacion", tableHeader: "Estado Operación" },
+            { accessKey: "formaOperativa", tableHeader: "Forma Operativa" },
+            { accessKey: "codEspecie", tableHeader: "Código Especie" },
+            { accessKey: "nroEspecie", tableHeader: "Número Especie" },
+            { accessKey: "plazo", tableHeader: "Plazo" },
+            { accessKey: "vencimiento", tableHeader: "Vencimiento" },
+            { accessKey: "codMoneda", tableHeader: "Código Moneda" },
+            { accessKey: "cantidad", tableHeader: "Cantidad" },
+            { accessKey: "precio", tableHeader: "Precio" },
+            { accessKey: "numeroOferta", tableHeader: "Número Oferta" },
+            { accessKey: "fechaIngresoOferta", tableHeader: "Fecha Ingreso Oferta" },
+            { accessKey: "operadorOferta", tableHeader: "Operador Oferta" },
+            { accessKey: "codComitente", tableHeader: "Código Comitente" },
+            { accessKey: "ventaEnCorto", tableHeader: "Venta en Corto" },
+            { accessKey: "monto", tableHeader: "Monto" },
+            { accessKey: "marcaDePase", tableHeader: "Marca de Pase" },
+            { accessKey: "tipoCuenta", tableHeader: "Tipo Cuenta" },
+            { accessKey: "horaIngresoOferta", tableHeader: "Hora Ingreso Oferta" },
+            { accessKey: "cantidadDias", tableHeader: "Cantidad Días" },
+            { accessKey: "marcaDeOrigen", tableHeader: "Marca de Origen" },
+            { accessKey: "corredorSistaco", tableHeader: "Corredor Sistaco" },
+            { accessKey: "CUIT", tableHeader: "CUIT" },
+            { accessKey: "nroCuenta", tableHeader: "Número Cuenta" },
+          ],
         },
-        addCuenta() {
-          let c = this.formCuentas.comitente.trim();
-          if (!c) return;
-          this.listaCuentas.push({ id: uuidv4(), comitente: c });
-          this.formCuentas.comitente = "";
-          this.saveCuentas();
+        mounted() {
+          const stored = localStorage.getItem("listaComitentes");
+          this.listaCuentas = stored ? JSON.parse(stored) : [];
         },
-        delCuenta(id) {
-          this.listaCuentas = this.listaCuentas.filter(x => x.id !== id);
-          this.saveCuentas();
-        },
-        onFileChange(e) {
-          const file = e.target.files[0];
-          if (!file) return;
-          if (!this.selectedFileType) {
-            return alert("No se seleccionó el tipo de archivo");
-          }
-          const reader = new FileReader();
-          reader.onload = () => {
-            const raw = reader.result;
-            console.log({ raw })
-            const lista = this.listaCuentas.map(x => x.comitente);
-            if (this.selectedFileType === "OPERSECEXT_GARA") {
-              const proc = procesaOpersec(raw);
-              console.log({ proc })
-              this.contenidoOPERSEC = proc.filter(r => lista.includes(r.codComitente?.trim()));
+        methods: {
+          saveCuentas() {
+            localStorage.setItem("listaComitentes", JSON.stringify(this.listaCuentas));
+          },
+          addCuenta() {
+            let c = this.formCuentas.comitente.trim();
+            if (!c) return;
+            this.listaCuentas.push({ id: uuidv4(), comitente: c });
+            this.formCuentas.comitente = "";
+            this.saveCuentas();
+          },
+          delCuenta(id) {
+            this.listaCuentas = this.listaCuentas.filter((x) => x.id !== id);
+            this.saveCuentas();
+          },
+          onFileChange(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            if (!this.selectedFileType) {
+              return alert("No se seleccionó el tipo de archivo");
             }
-            if (this.selectedFileType === "OPERBILEXT_GARA") {
-              const proc = procesaOperbil(raw);
-              console.log({ proc })
-              this.contenidoOPERBIL = proc.filter(r => lista.includes(r.codComitente?.trim()));
-            }
-          };
-          reader.readAsText(file);
+            const reader = new FileReader();
+            reader.onload = () => {
+              const raw = reader.result;
+              console.log({ raw });
+              const lista = this.listaCuentas.map((x) => x.comitente);
+              if (this.selectedFileType === "OPERSECEXT_GARA") {
+                const proc = procesaOpersec(raw);
+                console.log({ proc });
+                this.contenidoOPERSEC = proc.filter((r) => lista.includes(r.codComitente?.trim()));
+              }
+              if (this.selectedFileType === "OPERBILEXT_GARA") {
+                const proc = procesaOperbil(raw);
+                console.log({ proc });
+                this.contenidoOPERBIL = proc.filter((r) => lista.includes(r.codComitente?.trim()));
+              }
+            };
+            reader.readAsText(file);
+          },
+        },
+      });
+
+      function procesaOpersec(data = "", fechaConcertacion) {
+        const DICC_MONEDAS = { 0: "P", 1: "D", 2: "C" };
+        const DICC_FORMAS_OPERATIVAS = {
+          C: "Contado",
+          P: "Plazo",
+          I: "Índice",
+          O: "Opciones",
+          U: "Cauciones",
+          L: "Préstamos para Liquidación",
+          V: "Préstamos venta en corto",
+          J: "Futuro de Índice",
+          D: "Futuro de Monedas",
+          T: "Plazo por Lotes",
+        };
+        const DICC_PLAZOS = {
+          0: "Inmediato",
+          1: "24hs.",
+          2: "48hs.",
+          3: "72hs.",
+        };
+        const MERCADO = "BYMA";
+        const test = data.split("\r\n")?.[0]?.split('"')?.[2];
+        if (test != "V" && test != "C") {
+          alert("El contenido del archivo no corresponde con un archivo OPERSEC o esta vacio.");
+          return false;
         }
-      }
-    });
 
-   
-  function procesaOpersec(data = "", fechaConcertacion) {
-    const DICC_MONEDAS = { "0": "P", "1": "D", "2": "C" }
-    const DICC_FORMAS_OPERATIVAS = {
-      "C": "Contado",
-      "P": "Plazo",
-      "I": "Índice",
-      "O": "Opciones",
-      "U": "Cauciones",
-      "L": "Préstamos para Liquidación",
-      "V": "Préstamos venta en corto",
-      "J": "Futuro de Índice",
-      "D": "Futuro de Monedas",
-      "T": "Plazo por Lotes"
-    };
-    const DICC_PLAZOS = {
-      "0": "Inmediato",
-      "1": "24hs.",
-      "2": "48hs.",
-      "3": "72hs."
-    };
-    const MERCADO = "BYMA";
-    const test = data.split("\r\n")?.[0]?.split('"')?.[2];
-    if (test != "V" && test != "C") { alert("El contenido del archivo no corresponde con un archivo OPERSEC o esta vacio."); return false; }
+        const result = data.split("\r\n").map((linea) => {
+          const [
+            secuencia,
+            numeroOperacion,
+            tipoOferta,
+            codAgenteContraparte,
+            horaIngresoOperacion,
+            estadoOperacion,
+            formaOperativa,
+            codEspecie,
+            nroEspecie,
+            plazo,
+            vencimiento,
+            codMoneda,
+            cantidad,
+            precio,
+            numeroOferta,
+            fechaIngresoOferta,
+            operadorOferta,
+            codComitente,
+            ventaEnCorto,
+            monto,
+            marcaDePase,
+            tipoCuenta,
+            horaIngresoOferta,
+            cantidadDias,
+            marcaDeOrigen,
+            corredorSistaco,
+            CUIT,
+            nroCuenta,
+          ] = linea.split('"');
 
-    const result = data.split("\r\n").map((linea) => {
-      const [
-        secuencia,
-        numeroOperacion,
-        tipoOferta,
-        codAgenteContraparte,
-        horaIngresoOperacion,
-        estadoOperacion,
-        formaOperativa,
-        codEspecie,
-        nroEspecie,
-        plazo,
-        vencimiento,
-        codMoneda,
-        cantidad,
-        precio,
-        numeroOferta,
-        fechaIngresoOferta,
-        operadorOferta,
-        codComitente,
-        ventaEnCorto,
-        monto,
-        marcaDePase,
-        tipoCuenta,
-        horaIngresoOferta,
-        cantidadDias,
-        marcaDeOrigen,
-        corredorSistaco,
-        CUIT,
-        nroCuenta
-      ] = linea.split('"');
-
-      return {
-        secuencia,
-        numeroOperacion,
-        tipoOferta,
-        codAgenteContraparte,
-        horaIngresoOperacion,
-        estadoOperacion,
-        formaOperativa,
-        codEspecie,
-        nroEspecie,
-        plazo,
-        vencimiento,
-        codMoneda,
-        cantidad,
-        precio,
-        numeroOferta,
-        fechaIngresoOferta,
-        operadorOferta,
-        codComitente,
-        ventaEnCorto,
-        monto,
-        marcaDePase,
-        tipoCuenta,
-        horaIngresoOferta,
-        cantidadDias,
-        marcaDeOrigen,
-        corredorSistaco,
-        CUIT,
-        nroCuenta
-
+          return {
+            secuencia,
+            numeroOperacion,
+            tipoOferta,
+            codAgenteContraparte,
+            horaIngresoOperacion,
+            estadoOperacion,
+            formaOperativa,
+            codEspecie,
+            nroEspecie,
+            plazo,
+            vencimiento,
+            codMoneda,
+            cantidad,
+            precio,
+            numeroOferta,
+            fechaIngresoOferta,
+            operadorOferta,
+            codComitente,
+            ventaEnCorto,
+            monto,
+            marcaDePase,
+            tipoCuenta,
+            horaIngresoOferta,
+            cantidadDias,
+            marcaDeOrigen,
+            corredorSistaco,
+            CUIT,
+            nroCuenta,
+          };
+        });
+        return result;
       }
 
-    })
-    return result
-  }
+      function procesaOperbil(data = "", fechaConcertacion) {
+        const DICC_MONEDAS = { 0: "P", 1: "D", 2: "C" };
+        const DICC_FORMAS_OPERATIVAS = {
+          C: "Contado SB",
+          F: "Futuro SB",
+        };
+        const DICC_PLAZOS = {
+          0: "Inmediato",
+          1: "24hs.",
+          2: "48hs.",
+          3: "72hs.",
+        };
+        const MERCADO = "BYMA";
+        // origenOperacionMercado marcaDePase codNumericoFormaLiq, tipoMercado
 
+        const test = data.split("\r\n")?.[0]?.split('"')?.[4];
+        console.log({ test });
+        if (test != "V" && test != "C") {
+          return alert("Archivo OPERBILEXT con formato equivocado");
+          return false;
+        }
 
-  function procesaOperbil(data = "", fechaConcertacion) {
-    const DICC_MONEDAS = { "0": "P", "1": "D", "2": "C" }
-    const DICC_FORMAS_OPERATIVAS = {
-      "C": "Contado SB",
-      "F": "Futuro SB",
-    };
-    const DICC_PLAZOS = {
-      "0": "Inmediato",
-      "1": "24hs.",
-      "2": "48hs.",
-      "3": "72hs."
-    };
-    const MERCADO = "BYMA";
-    // origenOperacionMercado marcaDePase codNumericoFormaLiq, tipoMercado
+        const result = data.split("\r\n").map((linea) => {
+          let [
+            secuencia,
+            numeroOperacion,
+            estadoOperacion,
+            origenOperacionMercado,
+            tipoOferta,
+            formaOperativa,
+            codAgenteContraparte,
+            codComitente,
+            marcaDePase,
+            codEspecie,
+            plazo,
+            nroEspecie,
+            codMoneda,
+            cantidad,
+            precio,
+            monto,
+            horaIngresoOperacion,
+            codNumericoFormaLiq,
+            tipoMercado,
+            CUIT,
+            depositaria,
+            codCNV,
+            tipoLiq,
+            ctaClienteInterno,
+            participanteBYMA,
+            ownerID,
+            carteraPropia,
+            otroID,
+            tipoOperacionContraAG,
+            codComitenteCarteraPropia,
+          ] = linea.split('"');
 
-    const test = data.split("\r\n")?.[0]?.split('"')?.[4];
-    console.log({ test })
-    if (test != "V" && test != "C") { return alert("Archivo OPERBILEXT con formato equivocado"); return false; }
+          return {
+            secuencia,
+            numeroOperacion,
+            estadoOperacion,
+            origenOperacionMercado,
+            tipoOferta,
+            formaOperativa,
+            codAgenteContraparte,
+            codComitente,
+            marcaDePase,
+            codEspecie,
+            plazo,
+            nroEspecie,
+            codMoneda,
+            cantidad,
+            precio,
+            monto,
+            horaIngresoOperacion,
+            codNumericoFormaLiq,
+            tipoMercado,
+            CUIT,
+            depositaria,
+            codCNV,
+            tipoLiq,
+            ctaClienteInterno,
+            participanteBYMA,
+            ownerID,
+            carteraPropia,
+            otroID,
+            tipoOperacionContraAG,
+            codComitenteCarteraPropia,
+          };
+        });
 
-
-    const result = data.split("\r\n").map((linea) => {
-      let [
-        secuencia,
-        numeroOperacion,
-        estadoOperacion,
-        origenOperacionMercado,
-        tipoOferta,
-        formaOperativa,
-        codAgenteContraparte,
-        codComitente,
-        marcaDePase,
-        codEspecie,
-        plazo,
-        nroEspecie,
-        codMoneda,
-        cantidad,
-        precio,
-        monto,
-        horaIngresoOperacion,
-        codNumericoFormaLiq,
-        tipoMercado,
-        CUIT,
-        depositaria,
-        codCNV,
-        tipoLiq,
-        ctaClienteInterno,
-        participanteBYMA,
-        ownerID,
-        carteraPropia,
-        otroID,
-        tipoOperacionContraAG,
-        codComitenteCarteraPropia
-
-      ] = linea.split('"');
-
-      return {
-        secuencia,
-        numeroOperacion,
-        estadoOperacion,
-        origenOperacionMercado,
-        tipoOferta,
-        formaOperativa,
-        codAgenteContraparte,
-        codComitente,
-        marcaDePase,
-        codEspecie,
-        plazo,
-        nroEspecie,
-        codMoneda,
-        cantidad,
-        precio,
-        monto,
-        horaIngresoOperacion,
-        codNumericoFormaLiq,
-        tipoMercado,
-        CUIT,
-        depositaria,
-        codCNV,
-        tipoLiq,
-        ctaClienteInterno,
-        participanteBYMA,
-        ownerID,
-        carteraPropia,
-        otroID,
-        tipoOperacionContraAG,
-        codComitenteCarteraPropia
+        return result;
       }
-    })
-
-    return result
-
-  }
-  </script>
-</body>
+    </script>
+  </body>
 </html>
